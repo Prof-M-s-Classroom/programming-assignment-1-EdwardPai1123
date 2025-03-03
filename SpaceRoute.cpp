@@ -19,7 +19,7 @@ SpaceRoute<T>::~SpaceRoute() {  // Destructor deleting nodes
     tail = NULL;
 }
 template <typename T>
-void SpaceRoute<T>::addWaypointAtBeginning(T& data) {
+void SpaceRoute<T>::addWaypointAtBeginning(T& data) { // creates a new node with a given data pointing the beginning of the list
     Node<T> * newNode = new Node<T>(data);
     if (head == NULL) {
         head = tail = newNode;
@@ -31,7 +31,7 @@ void SpaceRoute<T>::addWaypointAtBeginning(T& data) {
 }
 
 template <typename T>
-void SpaceRoute<T>::addWaypointAtEnd(T& data) {
+void SpaceRoute<T>::addWaypointAtEnd(T& data) { // create a new node with a given data but this is pointing the end of the list
     Node<T> * newNode = new Node<T>(data);
     if (tail == NULL) {
         head = tail = newNode;
@@ -43,7 +43,7 @@ void SpaceRoute<T>::addWaypointAtEnd(T& data) {
 }
 
 template <typename T>
-void SpaceRoute<T>::addWaypointAtIndex(int index, T& data) {
+void SpaceRoute<T>::addWaypointAtIndex(int index, T& data) { // inserting a node into the given index and try to find the given index from index 0
     if (index == 0) {
         addWaypointAtBeginning(data);
         return;
@@ -70,14 +70,11 @@ void SpaceRoute<T>::addWaypointAtIndex(int index, T& data) {
 }
 
 template <typename T>
-void SpaceRoute<T>::removeWaypointAtBeginning() {
-    // checks if head is null
+void SpaceRoute<T>::removeWaypointAtBeginning() { // removes the beginning/first node
     if (!head) {
         return;
     }
-    // creating temporary variable
     Node<T> * current = head;
-    // setting to the next node
     head = head -> next;
     if (head) {
         head -> prev = NULL;
@@ -88,7 +85,7 @@ void SpaceRoute<T>::removeWaypointAtBeginning() {
 }
 
 template <typename T>
-void SpaceRoute<T>::removeWaypointAtEnd() {
+void SpaceRoute<T>::removeWaypointAtEnd() { // removing the last node and set a new tail
     if (!tail) {
         return;
     }
@@ -103,7 +100,7 @@ void SpaceRoute<T>::removeWaypointAtEnd() {
 }
 
 template <typename T>
-void SpaceRoute<T>::removeWaypointAtIndex(int index) {
+void SpaceRoute<T>::removeWaypointAtIndex(int index) { // removing the chosen node
     if (index == 0) {
         removeWaypointAtBeginning();
         return;
@@ -129,7 +126,7 @@ void SpaceRoute<T>::removeWaypointAtIndex(int index) {
 }
 
 template <typename T>
-void SpaceRoute<T>::traverseForward() {
+void SpaceRoute<T>::traverseForward() { // print things starts at head till the end of the list
     Node<T> * current = head;
     while (current) {
         current -> print();
@@ -139,7 +136,7 @@ void SpaceRoute<T>::traverseForward() {
 }
 
 template <typename T>
-void SpaceRoute<T>::traverseBackward() {
+void SpaceRoute<T>::traverseBackward() { // print things starts at tail till the first of the list
     Node<T> * current = tail;
     while (current) {
         current -> print();
@@ -149,7 +146,7 @@ void SpaceRoute<T>::traverseBackward() {
 }
 
 template <typename T>
-Node<T>* SpaceRoute<T>::getWaypoint(int index) {
+Node<T>* SpaceRoute<T>::getWaypoint(int index) { // keep searching until it gets the correct node that data wants
     Node<T> * current = head;
     int currentIndex = 0;
     while (current != NULL && currentIndex < index) {
@@ -160,7 +157,7 @@ Node<T>* SpaceRoute<T>::getWaypoint(int index) {
 }
 
 template <typename T>
-void SpaceRoute<T>::setWaypoint(int index, T& data) {
+void SpaceRoute<T>::setWaypoint(int index, T& data) { // replace the chosen index into the given index
     Node<T> * current = getWaypoint(index);
     if (current != NULL) {
         current->data = data;
